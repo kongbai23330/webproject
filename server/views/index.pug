@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  nav
+    div.nav-wrapper
+      h1 Recipes
+      div(class="right hide-on-med-and-down")
+        input#search(type="search", onkeydown="search();", autocomplete="off")
+      div.col qwe
+      div.col asd
+  div.container
+    div.col
+      div#images
+      h1#name= name
+      h2 instructions
+      ol#instructions
+      h2 ingredients
+      ol#ingredients
+    div.col
+      h1 New
+      h4 Name
+      input#name-text.validate(type='text')
+      h4.col instructions
+      textarea#instructions-text(name="", cols="23", rows="1")
+      br
+      button#add-instruction.btn(type='button') Add instruction
+      h4 Ingredients
+      textarea#ingredients-text(name="", cols="23", rows="1")
+      br
+      button#add-ingredient.btn(type='button') Add ingredient
+      br
+      br
+      br
+      br
+      //- button#test test
+      //- form#form(method='POST', action='/images/', enctype='multipart/form-data')
+      form#form(enctype='multipart/form-data')
+        input#image-input.btn(type='file', name='image', accept='image/png, image/jpeg', multiple="multiple")
+        button#submit.btn(type='submit') Submit
+  script(src="/general.js")
