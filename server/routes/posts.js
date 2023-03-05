@@ -74,7 +74,8 @@ router.post('/posts/:postId/upvote', async (req, res) => {
     }
 
     // Check if the current user has already voted on this post
-    if (post.voters.includes(postId)) {
+      if (post.voters.includes(token)) {
+        
       return res.status(400).json({ message: 'You have already voted on this post.' });
     }
 
@@ -101,7 +102,7 @@ router.post('/posts/:commentId/upvote/comment', async (req, res) => {
       }
   
       // Check if the current user has already voted on this post
-      if (comment.voters.includes(commentId)) {
+      if (comment.voters.includes(token)) {
         return res.status(400).json({ message: 'You have already voted on this post.' });
       }
   
