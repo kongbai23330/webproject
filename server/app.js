@@ -162,7 +162,7 @@ app.post("/api/user/register/", (req, res) => {
     
   })
 })
-
+// Endpoint for retrieving user email
 app.post("/api/email", (req, res) => {
   const email = req.auth.email;
     res.send({
@@ -173,7 +173,7 @@ app.post("/api/email", (req, res) => {
 app.post("/api/user/login", (req, res) => {
   var name=req.body.email;
   var pass=req.body.password;
-  
+  // Find user by email in the database
   Users.findOne({email:name},function(err,food){
     if(!food||err){
       
@@ -182,7 +182,7 @@ app.post("/api/user/login", (req, res) => {
         "msg": "Invalid credentials",
       });
     }else{
-      
+        // If user is found, verify password
       item=food;
       console.log(item)
       let password1=item.password
@@ -207,7 +207,8 @@ app.post("/api/user/login", (req, res) => {
             });
           });
 
-      }else{
+      } else {
+          // If password is incorrect, return an error response
           return res.status(401).send({
             "success": false,
             "msg": "Invalid credentials",
