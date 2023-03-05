@@ -113,15 +113,18 @@ router.post('/posts/:commentId/upvote/comment', async (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Failed to update post.' });
     }
-  });
+});
+  // Delete a post by ID
 router.delete('/posts/:postId',async (req, res) => {
     try {
+        // Get post ID from request parameters
         const { postId } = req.params;
         const { token } = req.body;
         console.log(postId)
       const post = await Post.findByIdAndDelete(postId);
-      
-      if (!post) {
+       // If the post is not found, return an error response
+        if (!post) {
+          // If there is an error, return an error response with the error message
         return res.status(404).json({ error: 'Post not found' });
       }
       
@@ -133,7 +136,8 @@ router.delete('/posts/:postId',async (req, res) => {
   
   
   router.put('/posts/:postId', async (req, res) => {
-    try {
+      try {
+        // Get post ID and updated post information from request body
       const { postId } = req.params;
       const { title, content, author } = req.body;
       const post = await Post.findByIdAndUpdate(postId, { title, content, author }, { new: true });
@@ -146,19 +150,22 @@ router.delete('/posts/:postId',async (req, res) => {
     }
   });
   router.put('/comments/:commentId', async (req, res) => {
-    try {
+      try {
+        // Get comment ID and updated comment information from request body
       const { commentId } = req.params;
       const { content } = req.body;
       const updatedComment = await Comment.findByIdAndUpdate(
         commentId,
         { content },
         { new: true }
-      );
+          );
+          // If the comment is not found, return an error response
       if (!updatedComment) {
         return res.status(404).json({ error: 'Comment not found' });
       }
       res.json(updatedComment);
-    } catch (err) {
+      } catch (err) {
+           // If there is an error, return an error response with the error message
       res.status(500).json({ error: err.message });
     }
   });
