@@ -202,7 +202,9 @@ app.post("/api/user/login", (req, res) => {
           (err, token) => {
             return res.json({success: true,
                 token,
-                email:item.id});
+                email: item.id,
+                trueemail:req.body.email
+            });
           });
 
       }else{
