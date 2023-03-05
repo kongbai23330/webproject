@@ -433,11 +433,7 @@ const [editCommentId, setEditCommentId] = useState(null);
                   <Grid item xs={12} key={post._id}>
                       <Paper elevation={3} className={classes.card}>
                           <CardHeader
-                              avatar={
-                                  <Avatar className={classes.avatar}>
-                                      {post.author.charAt(0)}
-                                  </Avatar>
-                              }
+                             
                               title={post.title}
                               subheader={`by ${post.author}`}
                           />
