@@ -22,9 +22,9 @@ import ReactPaginate from 'react-paginate'; // Import the ReactPaginate componen
 
 import { makeStyles } from '@mui/styles'; // Import the makeStyles function from Material UI
 import { pink } from '@mui/material/colors'; // Import the pink color from Material UI
-import { createTheme, ThemeProvider } from '@mui/styles'; // Import the createTheme and ThemeProvider functions from Material UI
 
-import theme from '@mui/styles'; // Import the theme
+
+
 const API_URL = 'http://localhost:1234'; // Define the API URL
 const useStyles = makeStyles({ // Use the makeStyles function to define some styles
     root: { // The root style
@@ -59,8 +59,11 @@ function Comment() {
     const handleLogout = () => {// Function to handle logout
         localStorage.removeItem('token');
         localStorage.removeItem('profilePicture')
+        localStorage.removeItem('userId')
         setLoggedIn(false);
-};
+    };
+    const username = localStorage.getItem('useremail');             
+    console.log(username)
 const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') ? true : false);
     const [editPostId, setEditPostId] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
@@ -295,7 +298,6 @@ const [editCommentId, setEditCommentId] = useState(null);
         setAuthor('');
     }
 
-                 
     
     // Render the UI components including header, post form and post list
   return (
@@ -311,7 +313,7 @@ const [editCommentId, setEditCommentId] = useState(null);
                         </Button>
                   )}
                   <Button color="inherit" component={Link} to="/User">
-                        {'user'}
+                        {username}
                     </Button>
                 </Toolbar>
             </AppBar>

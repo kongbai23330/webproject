@@ -68,8 +68,9 @@ const LoginPage = () => {
             setErrorMessage(data.message);
         }
         localStorage.setItem('userId', data.email);
+        localStorage.setItem('useremail',data.trueemail)
         console.log(localStorage);
-        const  userId  = localStorage.getItem('userId');
+        const  userId  = localStorage.getItem('useremail');
         console.log(userId)// TODO: Handle response from server
     };
     

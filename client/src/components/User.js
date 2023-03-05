@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { AppBar, Toolbar, Button } from '@mui/material';
 function UserProfile() {
   const [user, setUser] = useState({});
   const  userId  = localStorage.getItem('userId');
