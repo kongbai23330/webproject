@@ -58,18 +58,18 @@ const useStyles = makeStyles({ // Use the makeStyles function to define some sty
 function Comment() {
     const handleLogout = () => {// Function to handle logout
         localStorage.removeItem('token');
-        localStorage.removeItem('profilePicture')
+        
         localStorage.removeItem('userId')
         localStorage.removeItem('useremail')
         setLoggedIn(false);
     };
-    const username = localStorage.getItem('useremail');             
-    console.log(username)
+    // const username = localStorage.getItem('useremail');             
+    // console.log(username)
 const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') ? true : false);
     const [editPostId, setEditPostId] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
 const [postsPerPage, setPostsPerPage] = useState(10);
-
+const[username,setusername]=useState(localStorage.getItem('useremail') ? true : false)
     
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
@@ -87,7 +87,8 @@ const [editCommentId, setEditCommentId] = useState(null);
         fetchPosts();
         const token = localStorage.getItem('token');
         if (token) {
-          setLoggedIn(true);
+            setLoggedIn(true);
+            setusername(true)
         }
       }, []);
 
@@ -323,7 +324,7 @@ const [editCommentId, setEditCommentId] = useState(null);
                         </Button>
                   )}
                   <Button color="inherit" component={Link} to="/User">
-                        {username}
+                  {'Userinformation'}
                   </Button>
                   <Button color="inherit" component={Link} to="/">
             {'Login'}

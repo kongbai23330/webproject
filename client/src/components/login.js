@@ -61,8 +61,7 @@ const LoginPage = () => {
             localStorage.setItem('token', data.token);
             
             setLoggedIn(true);
-            const { userId } = localStorage.getItem('userId');
-            console.log(userId)
+            
             navigate('/comment');
         }
              // If unsuccessful login, set error message
