@@ -635,7 +635,7 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                           </Button>
                                           
                                       </form>
-                                      {/* 展示评论 */}
+                                      
                                       <ul className={classes.commentList}>
                                           {post.comments.map((comment) => (
                                               <li key={comment._id} className={classes.comment}>
