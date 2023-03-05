@@ -58,7 +58,10 @@ const RegisterPage = () => {
         <Toolbar>
           <Button color="inherit" component={Link} to="/comment">
             {'My Blog'}
-          </Button>
+                  </Button>
+                  <Button color="inherit" component={Link} to="/">
+            {'Login'}
+                    </Button>   
         </Toolbar>
       </AppBar>
       <Container maxWidth="xs">

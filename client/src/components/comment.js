@@ -60,6 +60,7 @@ function Comment() {
         localStorage.removeItem('token');
         localStorage.removeItem('profilePicture')
         localStorage.removeItem('userId')
+        localStorage.removeItem('useremail')
         setLoggedIn(false);
     };
     const username = localStorage.getItem('useremail');             
@@ -314,7 +315,10 @@ const [editCommentId, setEditCommentId] = useState(null);
                   )}
                   <Button color="inherit" component={Link} to="/User">
                         {username}
-                    </Button>
+                  </Button>
+                  <Button color="inherit" component={Link} to="/">
+            {'Login'}
+                    </Button>   
                 </Toolbar>
             </AppBar>
           <h1>My Blog</h1>

@@ -17,9 +17,11 @@ const LoginPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
      // Function for logging out the user
-    const handleLogout = () => {
+     const handleLogout = () => {// Function to handle logout
         localStorage.removeItem('token');
         localStorage.removeItem('profilePicture')
+        localStorage.removeItem('userId')
+        localStorage.removeItem('useremail')
         setLoggedIn(false);
     };
     
@@ -61,7 +63,7 @@ const LoginPage = () => {
             setLoggedIn(true);
             const { userId } = localStorage.getItem('userId');
             console.log(userId)
-            // navigate('/comment');
+            navigate('/comment');
         }
              // If unsuccessful login, set error message
         else {

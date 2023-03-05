@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { AppBar, Toolbar, Button } from '@mui/material';
 function UserProfile() {
   const [user, setUser] = useState({});
@@ -17,8 +17,19 @@ function UserProfile() {
     getUserById();
   }, [userId]);
 
-  return (
-    <div>
+    return (
+      
+        <div>
+            <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" component={Link} to="/comment">
+            {'My Blog'}
+                    </Button>
+                    <Button color="inherit" component={Link} to="/">
+            {'Login'}
+                    </Button>        
+        </Toolbar>
+      </AppBar>
       <h1>{user.name}</h1>
       <p>Email: {user.email}</p>
       <p>Bio: {user.bio || 'No bio available'}</p>
