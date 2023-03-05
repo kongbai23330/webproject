@@ -157,7 +157,7 @@ app.post("/api/user/register/", (req, res) => {
       });
     }
     else {
-        alert("Email already in use")
+        
       return res.status(403).json("Email already in use");
     }
     
