@@ -69,8 +69,8 @@ const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') ? true : 
     const [editPostId, setEditPostId] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
 const [postsPerPage, setPostsPerPage] = useState(10);
-const[username,setusername]=useState(localStorage.getItem('useremail') ? true : false)
-    
+
+    const[userid,setuserid]=useState('')
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
     const [comment, setComments] = useState([]);
@@ -88,7 +88,9 @@ const [editCommentId, setEditCommentId] = useState(null);
         const token = localStorage.getItem('token');
         if (token) {
             setLoggedIn(true);
-            setusername(true)
+            const usersid=localStorage.getItem('useremail')
+            console.log(usersid)
+            
         }
       }, []);
 
@@ -510,7 +512,7 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
       },
     body: JSON.stringify({
         vote: post.vote + 1,
-        token:post,
+        token:localStorage.getItem('useremail'),
     }),
 })
     
@@ -545,7 +547,10 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                                 'Content-Type': 'application/json',
                                                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                                               },
-                                              body: JSON.stringify({vote: post.vote - 1}),
+                                            body: JSON.stringify({
+                                                vote: post.vote - 1,
+                                                token:localStorage.getItem('useremail'),
+                                            }),
                                             })
                                         
                                                     .then((data) => {
@@ -556,7 +561,13 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                                         )
                                                     })
                                             
-                                              .catch((error) => console.error(error));
+                                              .catch(err => {
+                                                if (err.response.status === 400) {
+                                                  alert('Invalid input. Please try again.');
+                                                } else {
+                                                  console.log('Registration failed.');
+                                                }
+                                              });
                                               fetchPosts()
                                               fetchPosts() ;
                                           }}
@@ -701,7 +712,7 @@ fetch(`http://localhost:1234/api/posts/${comment._id}/upvote/comment`, {
       },
     body: JSON.stringify({
         vote: comment.vote + 1,
-        token:comment,
+        token:localStorage.getItem('useremail'),
     }),
 })
     
@@ -740,7 +751,7 @@ fetch(`http://localhost:1234/api/posts/${comment._id}/upvote/comment`, {
                                               },
                                             body: JSON.stringify({
                                                 vote: comment.vote - 1,
-                                            token:comment}),
+                                            token:localStorage.getItem('useremail')}),
                                             })
                                         
                                             .then((data) => {
