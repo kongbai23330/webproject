@@ -53,7 +53,7 @@ const LoginPage = () => {
             const { userId } = localStorage.getItem('userId');
             
             setLoggedIn(true);
-             navigate('/comment');
+            // navigate('/comment');
         }
         // If successful login, set token and log in
         else if (data.success) {

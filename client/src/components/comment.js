@@ -138,15 +138,18 @@ const [editCommentId, setEditCommentId] = useState(null);
   };
 
   const handleCommentSubmit = async (postId, commentContent, commentAuthor) => {// Function to handle comment submission
+      // Check if there is a token in local storage
       const token = localStorage.getItem('token');
       if (token === "1") {
               
       }
+       // If there is no token, display an alert message and return
     else if (!token) {
       alert('Please log in to comment!');
       return;
     }
       try {
+           // Make a POST request to the API endpoint for adding a comment to a post
       const response = await fetch(`http://localhost:1234/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
@@ -160,6 +163,7 @@ const [editCommentId, setEditCommentId] = useState(null);
       });
           const data = await response.json();
           console.log(data);
+          // Update the posts state to include the new comment
       const updatedPosts = posts.map(post => {
           if (post._id === postId) {
             console.log(post._id)
@@ -172,12 +176,13 @@ const [editCommentId, setEditCommentId] = useState(null);
       console.log(error);
     }
     };
+    // Function to handle post deletion
     const handlePostDelete = async (postId,post) => {
         console.log(post)
         const token = localStorage.getItem('token');
         if (token === "1") {
               
-        }
+        } // If there is no token or token does not match the post token, display an alert message and return
       else if (!token || post.token !== token) {
             console.log(token)
             console.log(postId)
@@ -187,6 +192,7 @@ const [editCommentId, setEditCommentId] = useState(null);
         try {
             console.log(postId)
             console.log(token)
+             // Make a DELETE request to the API endpoint for deleting a post
           const response = await fetch(`http://localhost:1234/api/posts/${postId}`, {
             method: 'DELETE',
             headers: {
@@ -195,7 +201,7 @@ const [editCommentId, setEditCommentId] = useState(null);
                 
               },
               body: JSON.stringify(post),
-          });
+          });// If the request is successful, update the posts state to remove the deleted post
           if (response.ok) {
             const updatedPosts = posts.filter(post => post._id !== postId);
             setPosts(updatedPosts);
@@ -208,12 +214,13 @@ const [editCommentId, setEditCommentId] = useState(null);
           alert('Failed to delete the post.');
         }
       };
-      
-      const handlePostEdit = (post) => {// Function to handle post deletion
+      // Function to handle post editing
+      const handlePostEdit = (post) => { // Check if there is a token in local storage
           const token = localStorage.getItem("token");
           if (token === "1") {
               
           }
+           // If there is no token or token does not match the post token, display an alert message and return
         else if (!token || post.token !== token) {
           alert("You are not authorized to edit this post!");
           return;
@@ -309,7 +316,9 @@ const [editCommentId, setEditCommentId] = useState(null);
                         {'My Blog'}
                     </Button>
                     {loggedIn && (
-                        <Button color="inherit" onClick={handleLogout}>
+                      <Button color="inherit"
+                          type="logout"
+                          onClick={handleLogout}>
                             {'Logout'}
                         </Button>
                   )}
@@ -484,7 +493,8 @@ const [editCommentId, setEditCommentId] = useState(null);
                                                // handle upvote click
   className={classes.button}
   variant="contained"
-  color="primary"
+                                              color="primary"
+                                              type="upvote"
   onClick={async () => {
     const newVotes = post.vote + 1;
       console.log(newVotes)
@@ -558,7 +568,8 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                           <Button
                                               // handle edit post click
                                           className={classes.button}
-                                          variant="contained"
+                                              variant="contained"
+                                              type="showcomment"
                                           onClick={() =>
                                               setPosts((posts) =>
                                                   posts.map((p) =>
@@ -572,7 +583,8 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                       <Button
     className={classes.button}
     variant="contained"
-    color="primary"
+                                              color="primary"
+                                              type="edit"
     onClick={() => {
         handlePostEdit(post);
         // handleCommentEdit(comment);
@@ -584,7 +596,8 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                           <Button
     className={classes.button}
     variant="contained"
-    color="secondary"
+                                              color="secondary"
+                                              type="delete"
     onClick={() => handlePostDelete(post._id,post)}
 >
     Delete
@@ -635,7 +648,7 @@ fetch(`http://localhost:1234/api/posts/${post._id}/upvote`, {
                                           </Button>
                                           
                                       </form>
-                                      
+                                     
                                       <ul className={classes.commentList}>
                                           {post.comments.map((comment) => (
                                               <li key={comment._id} className={classes.comment}>
@@ -710,7 +723,8 @@ fetch(`http://localhost:1234/api/posts/${comment._id}/upvote/comment`, {
                                       <Button
                                           className={classes.button}
                                           variant="contained"
-                                          color="secondary"
+                                                      color="secondary"
+                                                      type="downvote"
                                                       onClick={async () => {
                                                // Decrease the vote count for the comment by sending a POST request to the server
                                             const newVotes = post.vote - 1;
