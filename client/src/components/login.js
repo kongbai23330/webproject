@@ -40,6 +40,7 @@ const LoginPage = () => {
         });
         // If login fails, set error message
         if (response.status !== 200) {
+            alert("Please enter correct username password");
             setErrorMessage('Login failed');
             return;
         }
@@ -50,7 +51,7 @@ const LoginPage = () => {
             localStorage.setItem('token', "1");
             console.log(data)
             localStorage.setItem('userId', data.email);
-            const { userId } = localStorage.getItem('userId');
+            const userId  = localStorage.getItem('userId');
             
             setLoggedIn(true);
             // navigate('/comment');
@@ -61,7 +62,9 @@ const LoginPage = () => {
             localStorage.setItem('token', data.token);
             
             setLoggedIn(true);
-            
+            const  userId  = localStorage.getItem('userId');
+            console.log(userId)
+            alert("You are authenticated, Welcome <username")
             navigate('/comment');
         }
              // If unsuccessful login, set error message

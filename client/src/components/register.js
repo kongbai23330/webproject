@@ -36,7 +36,7 @@ const RegisterPage = () => {
       console.log(email)
       console.log(password);
       const data = await response.json();
-      
+      alert('Registration Successful')
 // Navigating to the home page after successful registration
       navigate('/')
     console.log(data); // TODO: Handle response from server
